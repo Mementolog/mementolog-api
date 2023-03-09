@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+    <arg name="parallel" value="80"/>
+
+    <!-- Show progress -->
+    <arg value="p"/>
+
+    <!-- Paths to check -->
+    <file>config</file>
+    <file>src</file>
+    <file>test</file>
+    <exclude-pattern>config/config.php</exclude-pattern>
+    <exclude-pattern>config/routes.php</exclude-pattern>
+
+    <!-- Include all rules from the Laminas Coding Standard -->
+    <rule ref="LaminasCodingStandard"/>
+
+    <rule ref="PSR12.Files.FileHeader.IncorrectOrder">
+        <exclude-pattern>config/pipeline.php</exclude-pattern>
+    </rule>
+
+    <!-- This convention is specific to Laminas project for historical reasons -->
+    <rule ref="WebimpressCodingStandard.NamingConventions.AbstractClass">
+        <exclude name="WebimpressCodingStandard.NamingConventions.AbstractClass.Prefix" />
+    </rule>
+    <rule ref="WebimpressCodingStandard.NamingConventions.Interface">
+        <exclude name="WebimpressCodingStandard.NamingConventions.Interface" />
+    </rule>
+    <rule ref="WebimpressCodingStandard.NamingConventions.Exception">
+        <exclude name="WebimpressCodingStandard.NamingConventions.Exception.Suffix" />
+    </rule>
+</ruleset>
