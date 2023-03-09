@@ -1,0 +1,32 @@
+# This configuration is meant to be behind TLS terminating load-balancing reverse proxy.
+{
+    admin off
+    auto_https off
+    grace_period 20s
+    log {
+        output stdout
+        format json
+    }
+    servers :80 {
+        # do not enable h2c unless reverse proxy in front really understands it,
+        # otherwise there is a risk of direct tunnel connection through proxy.
+        # protocols h1 h2c
+        protocols h1
+        trusted_proxies static {$TRUSTED_PROXIES_CIDR:"private_ranges"}
+    }
+}
+:80 {
+    root * /app/public
+    log
+
+    # Block special endpoints https://datatracker.ietf.org/doc/html/rfc8615
+    respond /.well-known/* "This server is not authorized to serve well-known locations" 403
+
+    # Uncomment to allow serving static files. Can not serve files created by
+    # application unless shared volume or bind mount is used.
+    # file_server
+
+    php_fastcgi {$PHP_FPM_UPSTREAM:"127.0.0.1:9000"} {
+        try_files /index.php
+    }
+}
