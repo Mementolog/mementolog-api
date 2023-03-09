@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.7.7@e028ba46ba0d7f9a78bc3201c251e137383e145f">
+  <file src="bin/clear-config-cache.php">
+    <MixedArgument>
+      <code><![CDATA[$config['config_cache_path']]]></code>
+      <code><![CDATA[$config['config_cache_path']]]></code>
+      <code><![CDATA[$config['config_cache_path']]]></code>
+      <code><![CDATA[$config['config_cache_path']]]></code>
+      <code><![CDATA[$config['config_cache_path']]]></code>
+    </MixedArgument>
+  </file>
+  <file src="config/container.php">
+    <MixedArgument>
+      <code>$dependencies</code>
+    </MixedArgument>
+    <MixedArrayAccess>
+      <code><![CDATA[$dependencies['services']]]></code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment>
+      <code><![CDATA[$dependencies['services']]]></code>
+      <code><![CDATA[$dependencies['services']['config']]]></code>
+    </MixedArrayAssignment>
+    <MixedAssignment>
+      <code>$dependencies</code>
+    </MixedAssignment>
+  </file>
+</files>

@@ -1,1 +1,4 @@
-# mementolog-api
+# Mementolog API
+
+Personal project.
+Stability: will definitely break.
