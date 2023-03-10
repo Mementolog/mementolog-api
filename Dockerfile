@@ -14,6 +14,7 @@ RUN --mount=type=cache,id=apk,sharing=locked,target=/etc/apk/cache \
         linux-headers \
         postgresql-dev \
         rabbitmq-c-dev \
+        libzip-dev \
     && apk add --update \
         ca-certificates \
         git \
@@ -33,6 +34,7 @@ RUN --mount=type=cache,id=apk,sharing=locked,target=/etc/apk/cache \
         pdo_mysql \
         pdo_pgsql \
         pgsql \
+        zip \
     && pecl install xdebug && docker-php-ext-enable xdebug \
     && echo 'xdebug.mode = off' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && docker-php-source delete \

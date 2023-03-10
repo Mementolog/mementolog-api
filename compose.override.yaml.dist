@@ -1,0 +1,13 @@
+services:
+  api:
+    volumes:
+      # mount local directory into container for local development with no rebuild/restart needed
+      # this will have some issues with file ownership, relies on a rootless docker with uidmap
+      - ./:/app:z
+
+# network needs to be created ahead of time to join services from different repos
+# docker network create mementolog-dev
+networks:
+  default:
+    external: true
+    name: mementolog-dev

@@ -1,0 +1,42 @@
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: app
+    expose:
+      - "9000"
+    environment:
+      DB_HOST: api-db
+      DB_PORT: "5432"
+      DB_NAME: mementolog
+      DB_USER: mementolog
+      DB_PASSWORD: mementolog
+
+  api-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: app
+    depends_on:
+      - api
+    ports:
+      - "80"
+    command: run-caddy
+    environment:
+      PHP_FPM_UPSTREAM: "api:9000"
+
+  api-db:
+    profiles:
+      - setup
+    image: postgres:15
+    ports:
+      - "5432"
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: mementolog
+      POSTGRES_PASSWORD: mementolog
+
+volumes:
+  postgresdata:
